@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4d7cfe;
+            text-align: center;
+        }
+
+        .grades-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4d7cfe;
+            color: white;
+        }
+
+        td {
+            background-color: #f4f4f9;
+        }
+
+        .average {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            background-color: #4d7cfe;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #3c66d4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calificaciones de Cursos</h1>
+
+        <table class="grades-table">
+            <thead>
+                <tr>
+                    <th>Curso</th>
+                    <th>Calificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Matemáticas Avanzadas</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>Experiencias Formativas</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Infraestructuras de Plataformas</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>Historia Universal</td>
+                    <td>17</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="average">
+            <p>Promedio: <strong>17.5</strong></p>
+        </div>
+
+      
+        <a href="categorias.html" class="back-button">Volver</a>
+    </div>
+</body>
+</html>

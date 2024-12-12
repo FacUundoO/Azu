@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuenta</title>
+  <link rel="stylesheet" href="stylescategorias.css">
+  <link rel="stylesheet" href="stylespagina.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    
+
+    header {
+      background-color: #3498db;
+      color: #fff;
+      padding: 20px 0;
+      font-size: 1.5em;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1100px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1em;
+      color: #7f8c8d;
+      margin-bottom: 40px;
+    }
+
+    .profile {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      display: inline-block;
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .profile li {
+      background-color: #ecf0f1;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile li strong {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    .profile li span {
+      color: #7f8c8d;
+    }
+
+    .input-field {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .input-field input {
+      padding: 12px 24px;
+      font-size: 1.1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    .button {
+      padding: 12px 24px;
+      font-size: 1.1em;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #fff;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .button:hover {
+      background-color: #2980b9;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 40px;
+      font-size: 1.2em;
+      color: #3498db;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      background-color: #ecf0f1;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .back-link:hover {
+      background-color: #bdc3c7;
+      color: #2c3e50;
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+  
+    <header class="header">
+      <div class="logo">
+          <a href="categorias.html"><img src="logo.svg" alt="AZU" class="logo-img"></a>
+          <h1 class="logo-text">AZU</h1>
+      </div>
+      <div class="user-info">
+        <div>
+          
+        </div>
+          <!-- Icono de Volver a la página anterior -->
+          <span class="icon">
+              <a href="categorias.html" class="icon-link">
+                  <i class="bx bx-arrow-back"></i> <!-- Icono de flecha hacia atrás -->
+              </a>
+              
+          </span>
+          <!-- Icono de la campanita -->
+          <span class="icon">🔔</span>
+          <span class="icon">📅</span>
+          <div class="user-avatar">D</div>
+      </div>
+  </header>
+    
+  
+
+  <div class="container">
+    <!-- Título y saludo -->
+    <h1>Bienvenido, <span id="username">Juan Pérez</span></h1>
+    <p>Aquí puedes gestionar tu perfil y preferencias personales.</p>
+
+    <!-- Información personal (Sección superior) -->
+    <h2>Información Personal</h2>
+    <ul class="profile">
+      <li>
+        <strong>Nombre:</strong>
+        <span id="user-name">Juan Pérez</span>
+      </li>
+      <li>
+        <strong>Correo Electrónico:</strong>
+        <span id="user-email">juan.perez@example.com</span>
+      </li>
+      <li>
+        <strong>Teléfono:</strong>
+        <span id="user-phone">+52 555 123 4567</span>
+      </li>
+      <!-- Contraseña no editable -->
+      <li>
+        <strong>Contraseña:</strong>
+        <span>****</span> <!-- No editable, solo muestra asteriscos -->
+      </li>
+    </ul>
+
+    <!-- Botones de acción (Sección inferior) -->
+    <a href="editar-perfil.html" class="button">Editar Perfil</a>
+    <a href="cambiar-contraseña.html" class="button">Cambiar Contraseña</a>
+
+    <!-- Botón para volver a la página de categorías -->
+    
+  </div>
+
+  <script>
+    // Cargar datos desde localStorage si existen
+    window.onload = function() {
+      if(localStorage.getItem("username")) {
+        document.getElementById("username").textContent = localStorage.getItem("username");
+        document.getElementById("user-name").textContent = localStorage.getItem("username");
+      }
+      if(localStorage.getItem("user-email")) {
+        document.getElementById("user-email").textContent = localStorage.getItem("user-email");
+      }
+      if(localStorage.getItem("user-phone")) {
+        document.getElementById("user-phone").textContent = localStorage.getItem("user-phone");
+      }
+    };
+  </script>
+
+</body>
+</html>

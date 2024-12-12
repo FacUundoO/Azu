@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylescategorias.css">
+  <link rel="stylesheet" href="stylespagina.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+  <title>Identificación Docente - Instituto Certus</title>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script> <!-- Librería para código de barras -->
+  <style>
+    /* Estilos generales */
+    
+    .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3498db; /* Azul principal */
+            padding: 15px 25px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+  width: 40px;
+  margin-right: 10px;
+}
+    .container {
+      background-color: #ffffff;
+      padding: 25px;
+      width: 320px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .id-card {
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .id-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #e1e8f0;
+    }
+
+    .id-card p {
+      font-size: 14px;
+      margin: 8px 0;
+    }
+
+    .id-card strong {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    /* Estilo del enlace de "Volver" */
+    .back-link {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      padding: 8px 16px;
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+    }
+
+    .back-link:hover {
+      background-color: #2980b9;
+    }
+
+    /* Estilo del reloj (transparente) */
+    .clock {
+      font-size: 16px;
+      color: #2c3e50;
+      margin-top: 15px;
+      font-weight: 600;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.7); /* Fondo transparente */
+      border-radius: 8px;
+      width: 120px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Media Queries para dispositivos pequeños */
+    @media (max-width: 480px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .id-card p {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+        <a href="categorias.html"><img src="logo.svg" alt="AZU" class="logo-img"></a>
+        <h1 class="logo-text">AZU</h1>
+    </div>
+    <div class="user-info">
+        <!-- Icono de Volver a la página anterior -->
+        <span class="icon">
+            <a href="categorias.html" class="icon-link">
+                <i class="bx bx-arrow-back"></i> <!-- Icono de flecha hacia atrás -->
+            </a>
+        </span>
+        <!-- Icono de la campanita -->
+        <span class="icon">🔔</span>
+        <span class="icon">📅</span>
+        <div class="user-avatar">D</div>
+    </div>
+</header>
+
+  <div class="container">
+    <h1>Identificación Docente</h1>
+    <div class="id-card">
+      <!-- Imagen del docente -->
+      <img src="perfil.jpg" alt="Foto del docente">
+      
+      <p><strong>Nombre:</strong> Juan Carlos Rodríguez</p>
+      <p><strong>Código Docente:</strong> D00123</p>
+      <p><strong>Instituto:</strong> Instituto Certus</p>
+      <p><strong>Materia:</strong> Matemáticas</p>
+      <p><strong>Correo:</strong> juan.rodriguez@certus.edu.pe</p>
+      <p><strong>Teléfono:</strong> +51 987 654 321</p>
+      <p><strong>Vigencia:</strong> 2024-2025</p>
+
+      <!-- Reloj -->
+      <p id="clock" class="clock"></p>
+    
+
+  <script>
+    // Función para mostrar la hora actual
+    function updateClock() {
+      const clockElement = document.getElementById('clock');
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      clockElement.textContent = `${hours}:${minutes}:${seconds}`;  
+    }
+
+    // Actualizar la hora cada segundo
+    setInterval(updateClock, 1000);
+
+    // Inicializar el reloj
+    updateClock();
+  </script>
+</body>
+</html>

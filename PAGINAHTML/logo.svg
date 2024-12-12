@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <!-- Stack of books -->
+  <rect x="100" y="600" width="600" height="50" fill="#FFFFFF" />
+  <rect x="120" y="550" width="560" height="50" fill="#FFFFFF" />
+  <rect x="140" y="500" width="520" height="50" fill="#FFFFFF" />
+
+  <!-- Globe -->
+  <circle cx="400" cy="300" r="120" fill="none" stroke="#FFFFFF" stroke-width="10" />
+  <line x1="280" y1="300" x2="520" y2="300" stroke="#FFFFFF" stroke-width="5" />
+  <line x1="400" y1="180" x2="400" y2="420" stroke="#FFFFFF" stroke-width="5" />
+  <path d="M320,220 Q400,300 480,220" fill="none" stroke="#FFFFFF" stroke-width="5" />
+  <path d="M320,380 Q400,300 480,380" fill="none" stroke="#FFFFFF" stroke-width="5" />
+</svg>

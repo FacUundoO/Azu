@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasarela de Pagos</title>
+    <link rel="stylesheet" href="styles-pasarela.css">
+    <link rel="stylesheet" href="stylespagina.css">
+    <link rel="stylesheet" href="style.carrusel.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="categorias.html"><img src="logo.svg" alt="AZU" class="logo-img"></a>
+            <h1>AZU</h1>
+        </div>
+        <div class="user-info">
+            <span class="icon">
+                <a href="pagina.html">
+                    <i class="bx bx-arrow-back"></i> <!-- Icono de flecha hacia atrás -->
+                </a>
+            </span>
+            <span class="icon">🔔</span>
+            <span class="icon">📅</span>
+            <div class="user-avatar">D</div>
+        </div>
+    </header>
+
+    <main class="payment-gateway-container">
+        <h2>Completa los Detalles de tu Pago</h2>
+        <form class="payment-form" onsubmit="processPayment(event)">
+            <label for="name">Nombre del titular de la tarjeta</label>
+            <input type="text" id="name" name="name" placeholder="Ejemplo: Juan Pérez" required>
+
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" placeholder="Ejemplo: juan.perez@gmail.com" required>
+
+            <label for="card-number">Número de Tarjeta</label>
+            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+
+            <div class="card-details">
+                <div>
+                    <label for="expiry">Fecha de Vencimiento</label>
+                    <input type="text" id="expiry" name="expiry" placeholder="MM/AA" maxlength="5" required>
+                </div>
+                <div>
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
+                </div>
+            </div>
+
+            <button type="submit" class="payment-submit-button">Procesar Pago</button>
+        </form>
+    </main>
+
+    <!-- Modal de Éxito -->
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>¡Pago Exitoso!</h3>
+            <p>Gracias por tu pago. Hemos enviado una confirmación a tu correo electrónico.</p>
+            <a href="pagina.html"><button class="close-modal-button" onclick="closeModal()">Cerrar</button></a>
+        </div>
+    </div>
+
+    <script>
+function processPayment(event) {
+    event.preventDefault();
+
+    // Mostrar el modal de éxito
+    const successModal = document.getElementById("success-modal");
+    successModal.style.display = "flex";
+
+    // Aquí puedes integrar lógica para enviar datos a un servidor o una API de pagos
+    console.log("Pago procesado");
+}
+
+function closeModal() {
+    const successModal = document.getElementById("success-modal");
+    successModal.style.display = "none";
+
+    // Redireccionar al panel principal después de cerrar el modal
+    window.location.href = "panelprincipal.html";
+}
+
+    </script>
+</body>
+</html>

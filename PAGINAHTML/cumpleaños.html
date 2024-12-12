@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <title>Calendario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f1f5f8; /* Fondo suave y claro */
+        color: #333;
+        line-height: 1.6;
+            }
+
+        /* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3498db; /* Azul principal */
+    padding: 15px 25px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+
+.logo-text {
+    color: #ffffff;
+}
+
+
+.icon-link {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo h1 {
+    margin-left: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.header .logo-img {
+    width: 35px;
+    height: 35px;
+}
+
+.header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.header .user-info .icon {
+    margin: 0 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.header .user-avatar {
+    background-color: #ffffff;
+    color: #3498db;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+        .text-color {
+            margin: 20px 0;
+            font-size: 2rem;
+            color: #1A5276;
+            position: relative;
+            text-transform: uppercase;
+            animation: colorChange 3s infinite alternate;
+            text-align: center;
+        }
+
+        h1::before, h1::after {
+            content: '';
+            position: absolute;
+            height: 4px;
+            width: 50px;
+            background: linear-gradient(90deg, #1A5276, #3498DB);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        h1::before {
+            left: 450px;
+        }
+
+        h1::after {
+            right: 450px;
+        }
+
+        @keyframes colorChange {
+            0% {
+                color: #1A5276;
+            }
+            50% {
+                color: #3498DB;
+            }
+            100% {
+                color: #1a70bc;
+            }
+        }
+
+        .calendar-container {
+    display: flex;
+    width: 80%;
+    max-width: 900px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    /* Estilos adicionales para centrar */
+    margin: 0 auto; /* Centra horizontalmente */
+    justify-content: center; /* Asegura que el contenido interno esté centrado */
+    align-items: center; /* Centra verticalmente el contenido interno si es necesario */
+}
+
+        .date-display {
+            background-color: #1A5276;
+            color: #fff;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .date-display .day {
+            font-size: 5rem;
+            font-weight: bold;
+        }
+
+        .date-display .details {
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .calendar {
+            background-color: #fff;
+            flex: 2;
+            padding: 20px;
+            
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .calendar-header button {
+            background-color: transparent;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .calendar-header button:hover {
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .calendar-table th,
+        .calendar-table td {
+            padding: 10px;
+            width: 14.2%;
+        }
+
+        .calendar-table th {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .calendar-table td {
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .calendar-table td:hover {
+            background-color: #e0e0e0;
+        }
+
+        .calendar-table td.selected {
+            background-color: #1A5276;
+            color: #fff;
+        }
+
+        .calendar-table td.disabled {
+            color: #ccc;
+            pointer-events: none;
+        }
+
+        #animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+
+        #animation-container.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #animation-container canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #animation-container button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="categorias.html"><img src="logo.svg" alt="AZU" class="logo-img"></a>
+            <h2 class="logo-text">AZU</h2>
+        </div>
+        <div class="user-info">
+          <div>
+            
+          </div>
+            <!-- Icono de Volver a la página anterior -->
+            <span class="icon">
+                <a href="categorias.html" class="icon-link">
+                    <i class="bx bx-arrow-back"></i> <!-- Icono de flecha hacia atrás -->
+                </a>
+                
+            </span>
+            <!-- Icono de la campanita -->
+            <span class="icon">🔔</span>
+            <span class="icon">📅</span>
+            <div class="user-avatar">D</div>
+        </div>
+    </header>
+
+    <h1 class="text-color">Docentes Cumpleañeros</h1>
+    <div class="calendar-container">
+        <div class="date-display">
+            <div class="day">3</div>
+            <div class="details">Martes &middot; Diciembre &middot; 2024</div>
+        </div>
+        <div class="calendar">
+            <div class="calendar-header">
+                <button id="prev">&#8249;</button>
+                <h2 id="month-year">Junio 2021</h2>
+                <button id="next">&#8250;</button>
+            </div>
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        <th>DOM</th>
+                        <th>LUN</th>
+                        <th>MAR</th>
+                        <th>MIÉ</th>
+                        <th>JUE</th>
+                        <th>VIE</th>
+                        <th>SÁB</th>
+                    </tr>
+                </thead>
+                <tbody id="calendar-body">
+                    <!-- Las celdas serán generadas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="animation-container">
+        <canvas id="c"></canvas>
+        <button id="close-animation">Cerrar</button>
+    </div>
+
+    <script src="animation.js"></script>
+    <script>
+        const birthdayDates = [3];
+        const animationContainer = document.getElementById("animation-container");
+        const closeAnimationButton = document.getElementById("close-animation");
+        const calendarBody = document.getElementById("calendar-body");
+        const monthYear = document.getElementById("month-year");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+
+        let currentDate = new Date();
+
+        function renderCalendar() {
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const firstDayIndex = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+
+            monthYear.textContent = `${firstDay.toLocaleString('es-ES', { month: 'long' })} ${firstDay.getFullYear()}`;
+
+            calendarBody.innerHTML = "";
+            let row = document.createElement("tr");
+
+            // Añadir celdas vacías al inicio
+            for (let i = 0; i < firstDayIndex; i++) {
+                const cell = document.createElement("td");
+                cell.classList.add("disabled");
+                row.appendChild(cell);
+            }
+
+            // Rellenar los días del mes
+            for (let day = 1; day <= daysInMonth; day++) {
+                if (row.children.length === 7) {
+                    calendarBody.appendChild(row);
+                    row = document.createElement("tr");
+                }
+
+                const cell = document.createElement("td");
+                cell.textContent = day;
+
+                if (birthdayDates.includes(day)) {
+                    cell.classList.add("selected");
+                    cell.addEventListener("click", () => {
+                        animationContainer.classList.add("active");
+                    });
+                }
+                cell.addEventListener("click", () => {
+                    const dayName = new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
+                        .toLocaleString('es-ES', { weekday: 'long' });
+                    document.querySelector(".date-display .day").textContent = day;
+                    document.querySelector(".date-display .details").textContent =
+                        `${dayName.charAt(0).toUpperCase() + dayName.slice(1)} · ${monthYear.textContent}`;
+                });
+
+                row.appendChild(cell);
+            }
+
+            // Añadir celdas vacías al final
+            while (row.children.length < 7) {
+                const cell = document.createElement("td");
+                cell.classList.add("disabled");
+                row.appendChild(cell);
+            }
+
+            calendarBody.appendChild(row);
+        }
+
+        prevButton.addEventListener("click", () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        nextButton.addEventListener("click", () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        closeAnimationButton.addEventListener("click", () => {
+            animationContainer.classList.remove("active");
+        });
+
+        renderCalendar();
+    </script>
+</body>
+</html>

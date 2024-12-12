@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asistencias</title>
+  <link rel="stylesheet" href="stylespagina.css">
+  <link rel="stylesheet" href="style.carrusel.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    /* General */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0; /* Color más suave */
+    }
+  
+    header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #003366;
+    color: #fff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 40px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+}
+
+.user-avatar {
+    background-color: #ff5722;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+  
+    .header img {
+      width: 50px;
+      margin-right: 15px;
+    }
+  
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+  
+    /* Container */
+    .container {
+      margin: 20px auto;
+      max-width: 900px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    }
+  
+    /* Attendance Section */
+    .attendance {
+      display: flex;
+      gap: 20px;
+    }
+  
+    .calendar-container {
+      flex: 1;
+      background: #f8f8f8; /* Gris claro para el calendario */
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    }
+  
+    .attendance-grid {
+      flex: 2;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      padding: 10px;
+      background: #f8f8f8;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    }
+  
+    .person {
+      text-align: center;
+    }
+  
+    .person img {
+      width: 50px;
+      border-radius: 50%;
+      margin-bottom: 5px;
+      border: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+  
+    .person.temprano img {
+      border-color: #4caf50; /* Verde suave */
+    }
+  
+    .person.tarde img {
+      border-color: #ffb300; /* Amarillo suave */
+    }
+  
+    .person.falta img {
+      border-color: #9e9e9e; /* Gris suave */
+    }
+  
+    .person.justificada img {
+      border-color: #ff7043; /* Naranja suave */
+    }
+  
+    .person.tardanza-justificada img {
+      border-color: #9c27b0; /* Púrpura suave */
+    }
+  
+    .person.congelado img {
+      border-color: #4fc3f7; /* Azul suave */
+    }
+  
+    .person-name {
+      font-size: 14px;
+    }
+  
+    /* Legend */
+    .legend {
+      margin-top: 20px;
+      padding: 10px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+  
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+  
+    .legend-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+  
+    .temprano-circle {
+      background: #4caf50; /* Verde suave */
+    }
+  
+    .tarde-circle {
+      background: #ffb300; /* Amarillo suave */
+    }
+  
+    .falta-circle {
+      background: #9e9e9e; /* Gris suave */
+    }
+  
+    .justificada-circle {
+      background: #ff7043; /* Naranja suave */
+    }
+  
+    .tardanza-justificada-circle {
+      background: #9c27b0; /* Púrpura suave */
+    }
+  
+    .congelado-circle {
+      background: #4fc3f7; /* Azul suave */
+    }
+  
+    /* Summary Section */
+    .summary {
+      margin-top: 30px;
+    }
+  
+    .summary h3 {
+      margin-bottom: 10px;
+    }
+  
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  
+    .summary-table th, .summary-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    .summary-table th {
+      background-color: #2a3d66; /* Azul oscuro para el encabezado */
+      color: white;
+    }
+  </style>
+  
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+        <a href="categorias.html"><img src="logo.svg" alt="AZU" class="logo-img"></a>
+        <h1>AZU</h1>
+    </div>
+    <div class="user-info">
+        <span class="icon">
+            <a href="pagina.html" class="icon-link">
+                <i class="bx bx-arrow-back"></i> 
+            </a>
+        </span>
+        <span class="icon">🔔</span>
+        <span class="icon">📅</span>
+        <div class="user-avatar">D</div>
+    </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Attendance Section -->
+    <div class="attendance">
+      <!-- Calendar -->
+      <div class="calendar-container">
+        <h3>Calendario</h3>
+        <input type="text" id="calendar" placeholder="Seleccionar fecha">
+      </div>
+
+      <!-- Attendance Grid -->
+      <div class="attendance-grid" id="attendance-grid">
+        <script>
+          const students = [
+            "Persona 1", "Persona 2", "Persona 3", "Persona 4", "Persona 5",
+            "Persona 6", "Persona 7", "Persona 8", "Persona 9", "Persona 10"
+          ];
+
+          students.forEach((name, index) => {
+            document.write(`
+              <div class="person" data-id="${index}" onclick="changeStatus(this)">
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="${name}">
+                <p class="person-name">${name}</p>
+              </div>
+            `);
+          });
+        </script>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-circle temprano-circle"></div>Temprano</div>
+      <div class="legend-item"><div class="legend-circle tarde-circle"></div>Tardanza</div>
+      <div class="legend-item"><div class="legend-circle falta-circle"></div>Falta</div>
+      <div class="legend-item"><div class="legend-circle justificada-circle"></div>Falta Justificada</div>
+      <div class="legend-item"><div class="legend-circle tardanza-justificada-circle"></div>Tardanza Justificada</div>
+      <div class="legend-item"><div class="legend-circle congelado-circle"></div>Congelado</div>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="summary">
+      <h3>Resumen de Asistencias</h3>
+      <table class="summary-table" id="summary-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Resumen dinámico -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Flatpickr
+    flatpickr("#calendar", {
+      inline: true,
+      locale: "es",
+      dateFormat: "d-m-Y"
+    });
+
+    // Registro de asistencias
+    const attendanceRecords = {};
+
+    // Change Attendance Status
+    function changeStatus(element) {
+      const states = [
+        "temprano",
+        "tarde",
+        "falta",
+        "justificada",
+        "tardanza-justificada",
+        "congelado"
+      ];
+
+      const studentId = element.getAttribute("data-id");
+      const studentName = element.querySelector(".person-name").textContent;
+      const currentState = states.find(state => element.classList.contains(state));
+      const currentIndex = currentState ? states.indexOf(currentState) : -1;
+
+      // Remove current state
+      element.classList.remove(...states);
+
+      // Add next state
+      const nextState = states[(currentIndex + 1) % states.length];
+      element.classList.add(nextState);
+
+      // Update attendance record
+      attendanceRecords[studentId] = {
+        name: studentName,
+        status: nextState
+      };
+
+      updateSummary();
+    }
+
+    // Update Summary
+    function updateSummary() {
+      const summaryTable = document.querySelector("#summary-table tbody");
+      summaryTable.innerHTML = "";
+
+      Object.values(attendanceRecords).forEach(record => {
+        const row = `
+          <tr>
+            <td>${record.name}</td>
+            <td>${record.status}</td>
+          </tr>
+        `;
+        summaryTable.innerHTML += row;
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f1f5f8; /* Fondo suave y claro */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3498db; /* Azul principal */
+    padding: 15px 25px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+
+.logo-text {
+    color: #ffffff;
+}
+
+
+.icon-link {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo h1 {
+    margin-left: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.header .logo-img {
+    width: 35px;
+    height: 35px;
+}
+
+.header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.header .user-info .icon {
+    margin: 0 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.header .user-avatar {
+    background-color: #ffffff;
+    color: #3498db;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* News Slider (Anuncios en una fila más compactos) */
+.news-slider {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos en una fila */
+    gap: 10px; /* Reduce el espacio entre los anuncios */
+    padding: 20px;
+    flex-wrap: wrap; /* Permite que se ajusten si la pantalla es pequeña */
+}
+
+.news-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1 1 22%; /* Hace que los anuncios ocupen un 22% del espacio en una fila */
+    min-width: 200px; /* Establece un tamaño mínimo para los anuncios */
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.news-card .news-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.news-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.news-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.news-card a {
+    color: #3498db; /* Azul */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.news-card a:hover {
+    text-decoration: underline;
+}
+
+/* Options Grid (Opciones en fila) */
+.options-grid {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos en una fila con espacio entre ellos */
+    padding: 20px;
+    gap: 15px; /* Separación entre los anuncios */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten si hay poco espacio */
+}
+
+.option-card {
+    background-color: #2980b9; /* Azul más oscuro */
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    flex: 1 1 18%; /* Ocupa una proporción de la fila, y permite que se ajusten a diferentes tamaños */
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    background-color: #1c6ea4; /* Azul más oscuro */
+}
+
+.option-card .option-image {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.option-card:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .news-slider {
+        flex-direction: column; /* Cambia a columna en pantallas más pequeñas */
+    }
+
+    .options-grid {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header .logo h1 {
+        font-size: 20px;
+    }
+
+    .header .user-info {
+        font-size: 14px;
+    }
+
+    .options-grid {
+        flex-direction: column;
+    }
+}

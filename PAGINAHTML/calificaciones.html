@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificaciones</title>
+    <link rel="stylesheet" href="stylespagina.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #549bc6, #283747); /* Fondo degradado azul fuerte y gris */
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
+    border-radius: 16px; /* Bordes redondeados */
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centrados todos los elementos dentro del contenedor */
+}
+
+.header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3498db; /* Azul principal */
+            padding: 15px 25px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.icons-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    background: linear-gradient(to right, #1A5276, #154360); /* Azul fuerte */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-radius: 16px; /* Bordes redondeados */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Quitar separación entre filas y columnas */
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.85); /* Fondo blanco translúcido */
+    border-radius: 16px; /* Bordes redondeados */
+    overflow: hidden; /* Para redondear completamente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Centrados todos los elementos de la tabla */
+}
+
+table th,
+table td {
+    text-align: center;
+    padding: 1rem;
+    border: none; /* Quitar bordes */
+    transition: background 0.3s, color 0.3s;
+    border-radius: 1px; /* Bordes redondeados en celdas */
+}
+
+table tr:hover {
+    background: rgba(40, 55, 71, 0.2); /* Resalte gris oscuro translúcido */
+}
+
+.status {
+    padding: 0.5rem 1rem;
+    border-radius: 12px; /* Bordes redondeados */
+    font-weight: bold;
+    background: #1A5276; /* Azul fuerte */
+    color: #FFFFFF; /* Texto blanco */
+}
+
+.action-icon {
+    cursor: pointer;
+    margin: 0 0.3rem;
+    color: #1A5276; /* Azul fuerte */
+    transition: transform 0.2s, color 0.3s;
+    border-radius: 50%; /* Iconos circulares */
+}
+
+.action-icon:hover {
+    color: #283747; /* Gris oscuro al pasar el mouse */
+    transform: scale(1.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+    border-radius: 16px; /* Bordes redondeados */
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
+    padding: 2rem;
+    border-radius: 16px; /* Bordes redondeados */
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: slideDown 0.5s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 1rem;
+    color: #1A5276; /* Azul fuerte */
+    border-radius: 12px; /* Bordes redondeados */
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px; /* Bordes redondeados */
+    transition: border 0.3s ease;
+}
+
+.modal-content input:focus {
+    border: 1px solid #1A5276; /* Azul fuerte */
+}
+
+.modal-content button {
+    background: linear-gradient(to right, #1A5276, #283747); /* Botón degradado */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 12px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-content button:hover {
+    background: linear-gradient(to right, #283747, #1A5276); /* Invertir degradado al hover */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #1A5276;
+    transition: color 0.3s ease;
+    border-radius: 50%; /* Icono circular */
+}
+
+.close:hover {
+    color: #283747; /* Gris oscuro */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    text-align: center; /* Centrados los elementos dentro del grupo */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1A5276; /* Azul fuerte */
+}
+
+.form-group select,
+.form-group input {
+    width: 80%;
+    padding: 0.5rem;
+    margin: 0 auto; /* Centrar el input/selector */
+    display: block; /* Mostrar como bloque */
+    border-radius: 12px; /* Bordes redondeados */
+    border: 1px solid #ddd;
+    transition: border 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border: 1px solid #1A5276; /* Azul fuerte */
+}
+.cell-rounded {
+    border-radius: 12px; /* Ajusta el valor del borde redondeado según tus preferencias */
+    padding: 0.5rem;
+}
+    </style>    
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+          <div class="logo-container">
+            <a href="categorias.html" class="logo-link">
+              <img src="logo.svg" alt="AZU" class="logo-img">
+            </a>
+            <h1 class="logo-text">AZU</h1>
+          </div>
+          <div class="icons-container">
+            <a href="pagina.html" class="icon-link">
+              <i class="bx bx-arrow-back"></i>
+            </a>
+            <span class="icon">🔔</span>
+            <span class="icon">📅</span>
+            <div class="user-avatar">D</div>
+          </div>
+        </div>
+      </header>
+
+    <div class="container">
+        <h1>Reporte de Notas Académicas</h1>
+        <!-- Filtros -->
+        <div class="filters">
+            <label>
+                Cursos:
+                <select id="courseSelector">
+                    <option>--Seleccione--</option>
+                    <option>Experiencias Formativas</option>
+                    <option>Algoritmos para la solución</option>
+                    <option>Lenguajes de Programacion</option>
+                    <option>Desarrollo de Aplicaciones</option>
+                    <option>Matematicas Aplicadas</option>
+                    <option>Infrastructura Plataformas</option>
+                    <option>Nuevas Tendencias en Tecnologías </option>
+                    <option>Herramientas Digitales</option>
+                    <option>Metodologia Cualitativa</option>
+                    <option>Experiencia del Cliente</option>
+                    <option>Metodologías Ágiles</option>
+                    <option>Comunicación y Gestión de la Información</option>
+                    <option>Introducción a la Investigación</option>
+                    <option>Creatividad e Innovación</option>
+                    <option>Técnicas de Pruebas de Software</option>
+                    <option>Liderazgo Estratégico</option>
+                </select>
+            </label>
+            <label>
+                Ciclo:
+                <select id="cycleSelector">
+                    <option>--Seleccione--</option>
+                </select>
+            </label>
+            <label>
+                Año Académico:
+                <select id="yearSelector"></select>
+            </label>
+            <button class="search-btn" onclick="updateStudents()">🔍</button>
+        </div>
+
+        <!-- Tabla -->
+        <table>
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Alumno</th>
+                    <th>Semana 2</th>
+                    <th>Semana 4</th>
+                    <th>Semana 6</th>
+                    <th>Semana 8</th>
+                    <th>Promedio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="studentTable"></tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Editar Notas</h2>
+            <form>
+                <label>Alumno:</label>
+                <input type="text" id="editStudentName" disabled>
+                <label>Semana 2:</label>
+                <input type="number" id="editSemana2" min="0" max="20" oninput="validateAndCalculate()">
+                <label>Semana 4:</label>
+                <input type="number" id="editSemana4" min="0" max="20" oninput="validateAndCalculate()">
+                <label>Semana 6:</label>
+                <input type="number" id="editSemana6" min="0" max="20" oninput="validateAndCalculate()">
+                <label>Semana 8:</label>
+                <input type="number" id="editSemana8" min="0" max="20" oninput="validateAndCalculate()">
+                <label>Promedio:</label>
+                <input type="text" id="editPromedio" disabled>
+                <button type="button" onclick="saveChanges()">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+       
+       const database = {
+            "2021": {
+                "2021-01": {
+                "Experiencias Formativas": ["Rudivina Abisrol","Junior Rolando Adco","Alexandra Eva Alvarado","Carlos Fabricio Ascoy","Jhonar Alberto Atoche","Gabriel Cabral","Jhoskar Jamin Cabrera","Nay Pamela Carrion","Jair Esteven Castro","Solanch Rocio Coaquira"],
+                "Algoritmos para la solución": ["Fatima Del Carmen Cruz","Alexandra Cuba","Aroni Alyssa Diana","Angelo Faustino Flores","Jamil Sebastian Gallegos","Alessandro David Garcia","Micaela Fernanda Guevara","Enrique Jose Carlos Huaman","Alex Diego Huamani","Brayan Jair Inga"]
+                },
+                "2021-02": {
+                    "Lenguajes de Programacion": ["Sasinai Jovanny","Sasergio Flavio","Daniel Cardenas","Nay Pamela Carrion","Caldo Rodrigo Castaneda","Rainer Noe Flores","Jamithr Rannses","Ruth Belen Gutierrez","Williams Fabian","Jhon Jenrry Hincho"],
+                    "Desarrollo de Aplicaciones": ["Jose Carlos Huaman","Kevin Huamani Ripas","Bryan Alexander Huapaya","Kevin Alex Huaytahuillca","Brayan Jair Inga","Mariano Facundo Melito","Sebastian Fabrizio Moscoso","Romulo Eduardo Pizarro","Carlos Daniel Pizarro","Jhon Dennis Quispe"]
+                }
+            },
+            "2022": {
+                "2022-01": {
+                "Matematicas Aplicadas": ["Wyll Smith Achulle","Patricia Jaqueline Chumbes","Williams Fabian Heredia","Kevin Huamani Ripas","Bryan Alexander Huapaya","Mariano Facundo Melito","Edgar Anthony Paul Zuniga","Piero Renato Pelaez","Gabriel Alonso Tueros","Alessio Vasquez"],
+                "Infrastructura Plataformas": ["Rudivina Abisrol","Jamil Sebastian Gallegos","Mery Lizard Vera","Jhonar Alberto Atoche","Jair Esteven Castro","Patricia Jaqueline Chumbes","Piero Renato Pelaez","Brayan Jair Inga","Alexandra Cuba","Williams Fabian Heredia"]
+                },
+                "2022-02": {
+                "Herramientas Digitales": ["Junior Rolando Adco","Sebastian Fabrizio Moscoso","Natsumi Avril Zapata","Gabriel Cabral","Ruth Belen Gutierrez","Williams Fabian Heredia","Mariano Facundo Melito","Salvador Noguchi Salomon","Alessio Vasquez Guillen","Carlos Daniel Pizarro"],
+                "Metodologia Cualitativa":["Alexandra Eva Alvarado","Enrique Jose Carlos Huaman","Wyll Smith Achulle","Daleska Verith Osorio","Jhon Jenrry Hincho","Brayan Alexander Huapaya","Alexandra Caster","Nicoel Nayeli Quiroga","Jhoskar Jamin Cabrera","Carlos Eduardo Remigio Felix"]
+                }
+            },
+            "2023": {
+                "2023-01": {
+                    "Experiencia del Cliente":["Carlos Fabricio Ascoy","Sasinai Jovanny","Solanch Rocio Coaquira","Jose Manuel Linares Quispe","Erika Wilma Jimenez Condori","Dailey Verith Osorio Cailahu","Alicia Diana Diaz Mego","Romulo Eduardo Pizarro","Ariel Alonso Chang Lizana","Fidel Alfredo Paucar Hernandez"],
+                    "Nuevas Tendencias en Tecnologías ":["Jhonar Alberto Atoche","Jamil Sebastian Gallegos","Rainer Noe Flores","Dian Allison Marques Sevilla","Xiomara Alessandra Llanos Sanchez","Mariano Facundo Melito","Kevin Andrew Avila Bobadilla","Geraldo Miguel Mateos Cornejo","Daniela Alanis Ore De La Cruz","Ruth Belen Gutierrez"]
+                },
+                "2023-02": {
+                    "Metodologías Ágiles":["Jair Esteven Castro","Piero Renato Pelaez","Kevin Huamani Ripas","Gustavo Emmanuel Pacheco Linares","Beckham Joseph Mestanza Benel","Jaqueline Aaliyah Juarez","Piero Renato Pelaez","Gabriel Alonso Tueros","Micaela Fernanda Guevara","Alyssa Diana Diaz Mego"],
+                    "Comunicación y Gestión de la Información":["Solanch Rocio Coaquira","Mery Lizard Vera","Nicoel Nayeli Quiroga","Alyssa Diana Diaz Mego","Ruth Belen Gutierrez","Wilma Mery Lizard","Xiomara Alessandra Llanos Sanchez","Patricia Jaqueline Chumbes","Gabriel Alonso Tueros","Sebastian Fabrizio Moscoso"]
+                }
+            },
+            "2024": {
+                "2024-01": {
+                    "Introducción a la Investigación":["Carlos Daniel Pizarro","Sebastian Fabrizio Moscoso","Alyssa Diana Diaz Mego","Gustavo Emmanuel Pacheco Linares","Jamil Sebastian Gallegos","Mariano Facundo Melito","Alexandra Eva Alvarado","Dian Allison Marques Sevilla","Jhonar Alberto Atoche","Alexandra Cuba"],
+                    "Creatividad e Innovación":["Jamil Sebastian Gallegos","Xiomara Alessandra Llanos Sanchez","Salvador Noguchi Salomon","Daleska Verith Osorio Cailahu","Mariano Facundo Melito","Brayan Alexander Huapaya","Jaqueline Aaliyah Juarez","Fidel Alfredo Paucar Hernandez","Natsumi Avril Zapata","Carlos Eduardo Remigio Felix"]
+                },
+                "2024-02": {
+                    "Técnicas de Pruebas de Software":["Gabriel Alonso Tueros","Erika Wilma Jimenez Condori","Patricia Jaqueline Chumbes","Alyssa Diana Diaz Mego","Ruth Belen Gutierrez","Daleska Verith Osorio Cailahu","Micaela Fernanda Guevara","Kevin Andrew Avila Bobadilla","Jhon Jenrry Hincho","Gabriel Cabral"],
+                    "Liderazgo Estratégico":["Dian Allison Marques Sevilla","Erika Wilma Jimenez Condori","Gabriel Cabral","Alexandra Caster","Jamil Sebastian Gallegos","Xiomara Alessandra Llanos Sanchez","Jaqueline Aaliyah Juarez","Micaela Fernanda Guevara","Jhonar Alberto Atoche","Natsumi Avril Zapata"]
+                }
+            },
+        };
+
+        function initializeSelectors() {
+    const yearSelector = document.getElementById('yearSelector');
+    const cycleSelector = document.getElementById('cycleSelector');
+    const courseSelector = document.getElementById('courseSelector');
+
+    
+    Object.keys(database).forEach(year => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelector.appendChild(option);
+    });
+
+   
+    yearSelector.addEventListener('change', () => {
+        const year = yearSelector.value;
+        cycleSelector.innerHTML = '<option>--Seleccione--</option>';
+        courseSelector.innerHTML = '<option>--Seleccione--</option>';
+        if (database[year]) {
+            Object.keys(database[year]).forEach(cycle => {
+                const option = document.createElement('option');
+                option.value = cycle;
+                option.textContent = cycle;
+                cycleSelector.appendChild(option);
+            });
+        }
+    });
+
+   
+    cycleSelector.addEventListener('change', () => {
+        const year = yearSelector.value;
+        const cycle = cycleSelector.value;
+        courseSelector.innerHTML = '<option>--Seleccione--</option>';
+        if (database[year] && database[year][cycle]) {
+            Object.keys(database[year][cycle]).forEach(course => {
+                const option = document.createElement('option');
+                option.value = course;
+                option.textContent = course;
+                courseSelector.appendChild(option);
+            });
+        }
+    });
+}
+
+
+initializeSelectors();
+
+function updateStudents() {
+    const yearSelector = document.getElementById('yearSelector');
+    const cycleSelector = document.getElementById('cycleSelector');
+    const courseSelector = document.getElementById('courseSelector');
+    const studentTable = document.getElementById('studentTable');
+
+    const selectedYear = yearSelector.value;
+    const selectedCycle = cycleSelector.value;
+    const selectedCourse = courseSelector.value;
+
+    studentTable.innerHTML = '';
+
+    if (database[selectedYear] && database[selectedYear][selectedCycle] && database[selectedYear][selectedCycle][selectedCourse]) {
+        const students = database[selectedYear][selectedCycle][selectedCourse];
+        students.forEach((student, index) => {
+            const row = `<tr>
+                <td>${index + 1}</td>
+                <td class="blue">${student}</td>
+                <td contenteditable="true">0</td>
+                <td contenteditable="true">0</td>
+                <td contenteditable="true">0</td>
+                <td contenteditable="true">0</td>
+                <td>0</td>
+                <td>
+                    <span class="action-icon" onclick="editStudent(${index})">🖉</span>
+                    <span class="action-icon" onclick="deleteStudent(${index})">🗑️</span>
+                </td>
+            </tr>`;
+            studentTable.innerHTML += row;
+        });
+    } else {
+        studentTable.innerHTML = '<tr><td colspan="8">No hay estudiantes disponibles para este curso, ciclo o año.</td></tr>';
+    }
+}
+
+
+function editStudent(index) {
+    const studentRow = document.querySelector(`#studentTable tr:nth-child(${index + 1})`);
+    const studentName = studentRow.querySelector('.blue').textContent;
+
+   
+    document.getElementById('editStudentName').value = studentName;
+    document.getElementById('editSemana2').value = studentRow.cells[2].textContent;
+    document.getElementById('editSemana4').value = studentRow.cells[3].textContent;
+    document.getElementById('editSemana6').value = studentRow.cells[4].textContent;
+    document.getElementById('editSemana8').value = studentRow.cells[5].textContent;
+    document.getElementById('editPromedio').value = studentRow.cells[6].textContent;
+
+    // Mostrar el modal de edición.
+    document.getElementById('editModal').style.display = 'flex';
+}
+
+// Función que guarda los cambios y actualiza la tabla.
+function saveChanges() {
+    const studentName = document.getElementById('editStudentName').value;
+    const semana2 = parseFloat(document.getElementById('editSemana2').value);
+    const semana4 = parseFloat(document.getElementById('editSemana4').value);
+    const semana6 = parseFloat(document.getElementById('editSemana6').value);
+    const semana8 = parseFloat(document.getElementById('editSemana8').value);
+
+    // Calcular el promedio
+    const promedio = (semana2 + semana4 + semana6 + semana8) / 4;
+
+    // Buscar la fila correspondiente al estudiante y actualizar valores.
+    const studentRow = Array.from(document.querySelectorAll('#studentTable .blue')).find(el => el.textContent === studentName).parentElement;
+
+    // Actualizar las celdas con las nuevas notas
+    studentRow.cells[2].textContent = semana2;
+    studentRow.cells[3].textContent = semana4;
+    studentRow.cells[4].textContent = semana6;
+    studentRow.cells[5].textContent = semana8;
+
+    // Mostrar el promedio en la celda de promedio
+    const promedioCell = studentRow.cells[6];
+    promedioCell.textContent = promedio.toFixed(2);
+
+    // Cambiar el color de la celda del promedio basado en el valor.
+    if (promedio >= 14) {
+        promedioCell.style.backgroundColor = "#28a745";  // Verde para aprobado
+        promedioCell.style.color = "white";
+        promedioCell.classList.add('cell-rounded');  // Texto blanco para contraste
+    } else if (promedio >= 10) {
+        promedioCell.style.backgroundColor = "#ffc107";  // Amarillo para intermedio
+        promedioCell.style.color = "black"; 
+        promedioCell.classList.add('cell-rounded'); // Texto negro para contraste
+    } else {
+        promedioCell.style.backgroundColor = "#dc3545";  // Rojo para no aprobado
+        promedioCell.style.color = "white"; 
+        promedioCell.classList.add('cell-rounded'); // Texto blanco para contraste
+    }
+
+    // Cerrar el modal de edición.
+    closeEditModal();
+}
+
+// Función que cierra el modal de edición.
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+
+        
+
+    </script>
+</body>
+</html>

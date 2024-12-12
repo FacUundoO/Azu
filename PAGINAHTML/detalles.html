@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificaciones</title>
+    <link rel="stylesheet" href="styles-calificaciones.css">
+    <link rel="stylesheet" href="stylespagina.css">
+    <link rel="stylesheet" href="style.carrusel.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="pagina.html"><img src="logo.svg" alt="AZU" class="logo-img"></a>
+            <h1>AZU</h1>
+        </div>
+        <div class="user-info">
+            <span class="icon">
+                <a href="calificaciones.html">
+                    <i class="bx bx-arrow-back"></i> <!-- Icono de flecha hacia atrás -->
+                </a>
+            </span>
+            <span class="icon">🔔</span>
+            <span class="icon">📅</span>
+            <div class="user-avatar">D</div>
+        </div>
+    </header>
+
+    <section class="table-section">
+        <table class="grades-table">
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Calificación</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Matemáticas</td>
+                    <td>17</td>
+                    <td><button onclick="showDetails('matematicas')">Ver</button></td>
+                </tr>
+                <tr>
+                    <td>Historia</td>
+                    <td>18</td>
+                    <td><button onclick="showDetails('historia')">Ver</button></td>
+                </tr>
+                <tr>
+                    <td>Química</td>
+                    <td>12</td>
+                    <td><button onclick="showDetails('quimica')">Ver</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="calificaciones.html"><button class="secondary-btn">Atras</button></a>
+    </section>
+
+    <!-- Sección de detalles -->
+    <section id="details-section" class="details-section hidden">
+        <div class="details-content">
+            <p id="details-content"></p>
+            <button onclick="hideDetails()">Cerrar</button>
+        </div>
+    </section>
+
+    <script>
+        function showDetails(subject) {
+            const detailsContent = document.getElementById("details-content");
+            const detailsSection = document.getElementById("details-section");
+
+            // Contenido dinámico basado en la materia
+            const details = {
+                matematicas: "Materia: Matemáticas. Profesor: Juan Pérez. Créditos: 4. Desempeño: Bueno.",
+                historia: "Materia: Historia. Profesor: Ana López. Créditos: 3. Desempeño: Excelente.",
+                quimica: "Materia: Química. Profesor: Carlos Gómez. Créditos: 5. Desempeño: Necesita mejorar."
+            };
+
+            // Actualizar contenido
+            detailsContent.textContent = details[subject] || "Detalles no disponibles.";
+            detailsSection.classList.remove("hidden");
+        }
+
+        function hideDetails() {
+            const detailsSection = document.getElementById("details-section");
+            detailsSection.classList.add("hidden");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis cursos</title>
+  <link rel="stylesheet" href="stylescategorias.css">
+  <link rel="stylesheet" href="stylespagina.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+  
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo-container">
+        <a href="categorias.html" class="logo-link">
+          <img src="logo.svg" alt="AZU" class="logo-img">
+        </a>
+        <h1 class="logo-text">AZU</h1>
+      </div>
+      <div class="icons-container">
+        <a href="categorias.html" class="icon-link">
+          <i class="bx bx-arrow-back"></i>
+        </a>
+        <span class="icon">🔔</span>
+        <span class="icon">📅</span>
+        <div class="user-avatar">D</div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <h1>Selecciona tus cursos</h1>
+    <p>Estos son los cursos asignados:</p>
+    <ul id="selected-courses" class="courses"></ul>
+
+    <h2>Agregar un curso</h2>
+    <div class="add-course-form">
+      <label for="course-select">Selecciona un curso:</label>
+      <select id="course-select">
+        <option value="">-- Selecciona un curso --</option>
+        <option value="Matemáticas Avanzadas">Matemáticas Avanzadas</option>
+        <option value="Física Moderna">Física Moderna</option>
+        <option value="Infraestructura de Plataformas">Infraestructura de Plataformas</option>
+        <option value="Experiencias Formativas">Experiencias Formativas</option>
+      </select>
+
+      <label for="time-select">Selecciona un horario:</label>
+      <select id="time-select">
+        <option value="">-- Selecciona un horario --</option>
+        <option value="Lunes y Miércoles, 10:00 AM - 12:00 PM">Lunes y Miércoles, 10:00 AM - 12:00 PM</option>
+        <option value="Viernes, 9:00 AM - 11:00 AM">Viernes, 9:00 AM - 11:00 AM</option>
+        <option value="Sábado, 9:15 AM - 10:45 AM">Sábado, 9:15 AM - 10:45 AM</option>
+        <option value="Jueves, 7:00 AM - 8:30 AM">Jueves, 7:00 AM - 8:30 AM</option>
+      </select>
+
+      <button id="add-course-button" class="add-button">Agregar Curso</button>
+    </div>
+
+    <!-- Botón de finalizar -->
+    <div class="finalize-container">
+      <button id="finalize-button" class="finalize-button">Finalizar Agregado</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("add-course-button").addEventListener("click", function () {
+      const courseSelect = document.getElementById("course-select");
+      const timeSelect = document.getElementById("time-select");
+
+      const course = courseSelect.value;
+      const time = timeSelect.value;
+
+      if (course && time) {
+        const courseList = document.getElementById("selected-courses");
+
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `<strong>${course}</strong> - ${time} 
+          <button class="delete-button">
+            <i class="fas fa-trash-alt"></i>
+          </button>`;
+
+        courseList.appendChild(listItem);
+
+        courseSelect.value = "";
+        timeSelect.value = "";
+
+        listItem.querySelector(".delete-button").addEventListener("click", function () {
+          listItem.remove();
+        });
+      } else {
+        alert("Por favor selecciona un curso y un horario.");
+      }
+    });
+
+    document.getElementById("finalize-button").addEventListener("click", function () {
+      const courseList = document.getElementById("selected-courses");
+      if (courseList.children.length > 0) {
+        alert("¡Agregado exitoso!");
+        courseList.innerHTML = ""; // Elimina todos los cursos de la lista
+      } else {
+        alert("No has agregado ningún curso.");
+      }
+    });
+  </script>
+
+  
+</body>
+</html> 
